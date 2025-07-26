@@ -16,11 +16,9 @@ pub enum Hand {
     Paper,
 }
 
-// コンポーネントでどの手かを記録
 #[derive(Component)]
 pub struct RspButton(Hand);
 
-//画像を並べる
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2d);
 
@@ -36,9 +34,9 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         })
         .with_children(|parent| {
             for (hand, path) in [
-                (Hand::Rock, "rps/rock.png"),
-                (Hand::Scissors, "rps/scissors.png"),
-                (Hand::Paper, "rps/paper.png"),
+                (Hand::Rock, "rsp/rock.png"),
+                (Hand::Scissors, "rsp/scissors.png"),
+                (Hand::Paper, "rsp/paper.png"),
             ] {
                 parent.spawn((
                     ImageNode::from(asset_server.load(path)),
@@ -55,7 +53,6 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         });
 }
 
-//CPUのランダムな手
 pub fn random_hand() -> Hand {
     match thread_rng().gen_range(0..=2) {
         0 => Hand::Rock,
@@ -64,7 +61,6 @@ pub fn random_hand() -> Hand {
     }
 }
 
-//クリックを検知しランダムを呼び出し勝敗をつける
 pub fn rps_system(mut query: Query<(&Interaction, &RspButton), Changed<Interaction>>) {
     let cpu_hand = random_hand();
     for (interaction, rps_button) in &mut query {
