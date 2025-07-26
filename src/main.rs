@@ -5,7 +5,7 @@ fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest()))
         .add_systems(Startup, setup)
-        .add_systems(Update, rps_system)
+        .add_systems(Update, rsp_system)
         .run();
 }
 
@@ -61,7 +61,7 @@ pub fn random_hand() -> Hand {
     }
 }
 
-pub fn rps_system(mut query: Query<(&Interaction, &RspButton), Changed<Interaction>>) {
+pub fn rsp_system(mut query: Query<(&Interaction, &RspButton), Changed<Interaction>>) {
     let cpu_hand = random_hand();
     for (interaction, rps_button) in &mut query {
         if *interaction == Interaction::Pressed {
