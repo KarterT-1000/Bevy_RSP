@@ -46,13 +46,16 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                         height: Val::Px(500.),
                         ..default()
                     },
+                    //各画像に対しInteractionを指定
                     Interaction::None,
+                    //各画像に対しぐーちょきパーを指定
                     RspButton(hand),
                 ));
             }
         });
 }
 
+//ランダムに[ぐー] [ちょき] [ぱー] を選ぶ
 pub fn random_hand() -> Hand {
     match thread_rng().gen_range(0..=2) {
         0 => Hand::Rock,
@@ -61,6 +64,7 @@ pub fn random_hand() -> Hand {
     }
 }
 
+//クリックした手とランダムな手を比べて勝敗を決定する
 pub fn rsp_system(mut query: Query<(&Interaction, &RspButton), Changed<Interaction>>) {
     let cpu_hand = random_hand();
     for (interaction, rps_button) in &mut query {
