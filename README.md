@@ -1,3 +1,3 @@
 Bevyをつかったじゃんけんゲームです<br>
 頻繁に変更が加わるのでバージョンの確認が必須です。
-わからないときはBevy公式ページ(https://bevy.org/)のNewsを見よう！
+Bevy公式ページ(https://bevy.org/)
